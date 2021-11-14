@@ -27,9 +27,10 @@ function testYoutubeRegex(url) {
   const youtubeRegex = /v=/;
   return youtubeRegex.test(url);
 }
+//
 
 function sliceYoutubeURL(url) {
   const urlWithoutV = url.split("v=")[1];
-  const videoCode = urlWithoutV.split("&");
+  const videoCode = urlWithoutV.split("&")[0];
   return videoCode;
 }
