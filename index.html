@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Youtube Player</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="favicon.ico" />
+</head>
+
+<body>
+  <div class="container">
+    <section id="form">
+      <form action="javascript:;" onsubmit="showContent()">
+        <!-- <label for="contentID">Content ID</label> -->
+        <input type="text" name="contentID" id="contentID" />
+        <!-- 
+          <input type="radio" id="video" name="contentType" value="video" />
+          <label for="male">Youtube Video</label><br />
+
+          <input
+            type="radio"
+            id="playlist"
+            name="contentType"
+            value="playlist"
+          />
+          <label for="female">Youtube Playlist</label><br />
+ -->
+        <button type="submit" value="go">GO</button>
+      </form>
+    </section>
+    <section id="content"></section>
+  </div>
+  <script src="./app.js"></script>
+</body>
+
+</html>
