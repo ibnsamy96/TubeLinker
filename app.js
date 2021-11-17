@@ -13,24 +13,13 @@ let contentIDElement = document.querySelector("#contentID");
 
 function showContent(value = null) {
   contentID = value || contentIDElement.value;
-  //   contentType = document.querySelector('input[name="contentType"]:checked')
-  //     .value;
-
-  //   if (contentType === "video") {
   document.querySelector("#content").innerHTML = videoCode(contentID);
-  //   } else {
-  //     document.querySelector("#content").innerHTML = playlistCode(contentID);
-  //   }
 }
 
 window.addEventListener("load", () => {
-  // const urlArr = location.href.split("?");
-  // if (urlArr[1]) {
-  //   contentID = urlArr[1].split("=")[1];
-  //   contentIDElement.value = contentID;
-  //   showContent(contentID);
-  // }
   const queryParams = extractQueryParams(location.href);
+  if (!queryParams) return;
+  console.log("waw");
   if (Object.keys(queryParams).includes("video")) {
     const videoID = queryParams.video;
     contentIDElement.value = videoID;
@@ -42,12 +31,10 @@ window.addEventListener("load", () => {
 });
 
 function extractQueryParams(url) {
-  const queries = url.split("?").splice(0, 1);
+  const queries = url.split("?");
+  queries.splice(0, 1);
   if (queries.length === 0 || !queries[0]) return;
-  // const queryParams = queries.map((query) => {
-  //   const tempQueryArr = query.split("=");
-  //   return { [tempQueryArr[0]] : tempQueryArr[1] };
-  // });
+
   const queryParams = queries.reduce((acc, query) => {
     const tempQueryArr = query.split("=");
     acc[tempQueryArr[0]] = tempQueryArr[1];
