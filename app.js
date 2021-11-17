@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
     if (Object.keys(queryParams).includes(type)) {
       const contentId = queryParams[type];
       contentIDElement.value = contentId;
-      // document.querySelector("#" + type).setAttribute("checked", "");
+      contentTypeElement.value = type;
       showContent(contentId, type);
       return true;
     } else return false;
