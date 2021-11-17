@@ -19,24 +19,14 @@
     <div class="container">
       <section id="form">
         <form action="javascript:;" onsubmit="showContent()">
-          <!-- <label for="contentID">Content ID</label> -->
-          <input type="text" name="contentID" id="contentID" />
+          <div>
+            <input type="text" name="contentID" id="contentID" />
 
-          <br />
-
-          <input type="radio" id="video" name="contentType" value="video" />
-          <label for="video">video</label>
-
-          <input
-            type="radio"
-            id="playlist"
-            name="contentType"
-            value="playlist"
-          />
-          <label for="playlist">playlist</label>
-
-          <br />
-          <br />
+            <select name="contentType" id="contentType">
+              <option value="video">VIDEO</option>
+              <option value="playlist">PLAYLIST</option>
+            </select>
+          </div>
 
           <button type="submit" value="go">GO</button>
         </form>

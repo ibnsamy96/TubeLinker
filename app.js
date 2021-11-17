@@ -9,14 +9,12 @@ const addVideoIframe = (videoID) => {
 };
 
 let contentIDElement = document.querySelector("#contentID");
-let contentTypeElements = document.querySelectorAll(
-  "input[name='contentType']"
-);
+let contentTypeElement = document.querySelector("#contentType");
 
 function showContent(value = null, type = null) {
   contentID = value || contentIDElement.value;
-  contentType = type || [...contentTypeElements].find((el) => el.checked).value;
-
+  contentType = type || contentTypeElement.value;
+  console.log(contentType);
   if (contentType === "video")
     document.querySelector("#content").innerHTML = addVideoIframe(contentID);
   else if (contentType === "playlist")
@@ -31,7 +29,7 @@ window.addEventListener("load", () => {
     if (Object.keys(queryParams).includes(type)) {
       const contentId = queryParams[type];
       contentIDElement.value = contentId;
-      document.querySelector("#" + type).setAttribute("checked", "");
+      // document.querySelector("#" + type).setAttribute("checked", "");
       showContent(contentId, type);
       return true;
     } else return false;

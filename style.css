@@ -9,8 +9,11 @@
   outline: none;
 }
 
-html,
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   background-color: rosybrown;
 }
 
@@ -18,11 +21,31 @@ body {
   max-width: 950px;
   margin: auto;
   text-align: center;
-  align-items: center;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 section {
   margin-top: 35px;
+  width: 100%;
+}
+
+section#content {
+  flex-grow: 2;
+}
+
+form {
+  max-width: 880px;
+  margin: auto;
+}
+
+form div {
+  width: 74%;
+  position: relative;
+  margin: auto;
+  display: inline-block;
 }
 
 input {
@@ -31,6 +54,27 @@ input {
   padding: 1rem 1.5rem;
   /* border: none; */
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+  width: -webkit-fill-available;
+}
+
+select {
+  padding: 1rem 0.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+  border-left: solid 1px rgba(0, 0, 0, 0.15);
+  /* text-align: center; */
+}
+select,
+option {
+  /* color: blue; */
+  font-weight: 700;
 }
 
 input:hover,
@@ -56,6 +100,7 @@ button {
   border-radius: 5px;
   font-weight: bold;
   color: white;
+  display: inline-block;
 }
 
 button:focus {
@@ -68,4 +113,44 @@ button:hover {
 
 iframe {
   border-radius: 10px;
+  max-width: 90%;
+  aspect-ratio: 750/450;
+  height: auto;
+  margin-bottom: 35px;
+}
+
+@media (max-width: 550px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+  form {
+    width: 90%;
+    margin: auto;
+  }
+  form div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  select {
+    padding: 1rem 0.2rem;
+  }
+  button {
+    display: block;
+    margin-left: auto;
+  }
+
+  iframe {
+    margin-bottom: 0;
+  }
+
+  #form {
+    margin-bottom: 35px;
+  }
+
+  #content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
 }
