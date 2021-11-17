@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube Player</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="favicon.ico" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Youtube Player</title>
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" href="favicon.ico" />
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-  <div class="container">
-    <section id="form">
-      <form action="javascript:;" onsubmit="showContent()">
-        <!-- <label for="contentID">Content ID</label> -->
-        <input type="text" name="contentID" id="contentID" />
-        <!-- 
+  <body>
+    <div class="container">
+      <section id="form">
+        <form action="javascript:;" onsubmit="showContent()">
+          <!-- <label for="contentID">Content ID</label> -->
+          <input type="text" name="contentID" id="contentID" />
+
+          <br />
+
           <input type="radio" id="video" name="contentType" value="video" />
-          <label for="male">Youtube Video</label><br />
+          <label for="video">video</label>
 
           <input
             type="radio"
@@ -25,14 +33,16 @@
             name="contentType"
             value="playlist"
           />
-          <label for="female">Youtube Playlist</label><br />
- -->
-        <button type="submit" value="go">GO</button>
-      </form>
-    </section>
-    <section id="content"></section>
-  </div>
-  <script src="./app.js"></script>
-</body>
+          <label for="playlist">playlist</label>
 
+          <br />
+          <br />
+
+          <button type="submit" value="go">GO</button>
+        </form>
+      </section>
+      <section id="content"></section>
+    </div>
+    <script src="./app.js"></script>
+  </body>
 </html>

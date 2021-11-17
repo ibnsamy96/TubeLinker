@@ -1,19 +1,31 @@
-const playlistCode = (listID) => {
+const addPlaylistIframe = (listID) => {
   // src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY"
   return `<iframe width="750" height="450" src="https://www.youtube.com/embed?listType=playlist&list=${listID}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 };
 
-const videoCode = (videoID) => {
+const addVideoIframe = (videoID) => {
   // src="https://www.youtube.com/embed/tgbNymZ7vqY"
-  return `<iframe width="750" height="450" src="https://www.youtube.com/embed/${videoID}?rel=0" frameborder="0" allow="autoplay; picture-in-picture" allowfullscreen></iframe>`;
+  return `<iframe width="750" height="450" src="https://www.youtube.com/embed/${videoID}?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 };
 
 let contentIDElement = document.querySelector("#contentID");
-// let contentType;
+let contentTypeElements = document.querySelectorAll(
+  "input[name='contentType']"
+);
 
-function showContent(value = null) {
+function showContent(value = null, type = null) {
   contentID = value || contentIDElement.value;
-  document.querySelector("#content").innerHTML = videoCode(contentID);
+  contentType = type || [...contentTypeElements].find((el) => el.checked).value;
+
+  switch (contentType) {
+    case "video":
+      document.querySelector("#content").innerHTML = addVideoIframe(contentID);
+      break;
+    case "playlist":
+      document.querySelector("#content").innerHTML =
+        addPlaylistIframe(contentID);
+      break;
+  }
 }
 
 window.addEventListener("load", () => {
@@ -23,7 +35,7 @@ window.addEventListener("load", () => {
   if (Object.keys(queryParams).includes("video")) {
     const videoID = queryParams.video;
     contentIDElement.value = videoID;
-    showContent(videoID);
+    showContent(videoID, "video");
   }
   if (Object.keys(queryParams).includes("playlist")) {
     // TODO grab its data and show its fist video

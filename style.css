@@ -2,12 +2,12 @@
   margin: 0;
   padding: 0;
   transition: all 0.2s ease-in-out;
+  font-family: "Overpass", sans-serif;
 }
 
 :focus {
   outline: none;
 }
-
 
 html,
 body {
@@ -26,32 +26,15 @@ section {
 }
 
 input[type="radio"] {
-  display: inline;
-}
-
-button {
-  background-color: blueviolet;
-  padding: 1rem 2rem;
-  border: 1px solid transparent;
-  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  font-weight: bold;
-  color: white;
+  /* display: inline; */
 }
 
 input {
   border-radius: 5px;
   border: 1px solid transparent;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   /* border: none; */
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1);
-}
-
-
-
-label {
-  color: rosybrown;
-  font-size: 1.3em;
 }
 
 input:hover,
@@ -64,10 +47,29 @@ button:focus {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.4);
 }
 
+label {
+  /* font-size: 1.3em; */
+}
+
+label,
+button {
+  color: white;
+  font-weight: bold;
+}
+button {
+  background-color: blueviolet;
+  padding: 1rem 2rem;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+}
+
 button:focus {
   background-color: purple;
 }
 
 iframe {
-  border-radius: 10px
+  border-radius: 10px;
 }
