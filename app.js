@@ -17,29 +17,25 @@ function showContent(value = null, type = null) {
   contentID = value || contentIDElement.value;
   contentType = type || [...contentTypeElements].find((el) => el.checked).value;
 
-  switch (contentType) {
-    case "video":
-      document.querySelector("#content").innerHTML = addVideoIframe(contentID);
-      break;
-    case "playlist":
-      document.querySelector("#content").innerHTML =
-        addPlaylistIframe(contentID);
-      break;
-  }
+  if (contentType === "video")
+    document.querySelector("#content").innerHTML = addVideoIframe(contentID);
+  else if (contentType === "playlist")
+    document.querySelector("#content").innerHTML = addPlaylistIframe(contentID);
 }
 
 window.addEventListener("load", () => {
   const queryParams = extractQueryParams(location.href);
   if (!queryParams) return;
-  console.log("waw");
-  if (Object.keys(queryParams).includes("video")) {
-    const videoID = queryParams.video;
-    contentIDElement.value = videoID;
-    showContent(videoID, "video");
-  }
-  if (Object.keys(queryParams).includes("playlist")) {
-    // TODO grab its data and show its fist video
-  }
+
+  ["video", "playlist"].some((type) => {
+    if (Object.keys(queryParams).includes(type)) {
+      const contentId = queryParams[type];
+      contentIDElement.value = contentId;
+      document.querySelector("#" + type).setAttribute("checked", "");
+      showContent(contentId, type);
+      return true;
+    } else return false;
+  });
 });
 
 function extractQueryParams(url) {
