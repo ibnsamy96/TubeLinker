@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const dialogBox = document.getElementById("dialog-box");
 
   if (testYoutubeRegex(currentTab.url)) {
-    const videoCode = sliceYoutubeURL(currentTab.url);
+    const { contentID, type } = sliceYoutubeURL(currentTab.url);
 
     chrome.tabs.create({
-      url: `https://youtube-player-smoky.vercel.app/?v=${videoCode}`,
+      url: `https://myyp.vercel.app/?${type}=${contentID}`,
     });
   } else {
     dialogBox.innerText = "It isn't a youtube article link!";
@@ -24,13 +24,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function testYoutubeRegex(url) {
-  const youtubeRegex = /v=/;
+  const youtubeRegex = /v=|list=/;
   return youtubeRegex.test(url);
 }
 //
 
 function sliceYoutubeURL(url) {
-  const urlWithoutV = url.split("v=")[1];
-  const videoCode = urlWithoutV.split("&")[0];
-  return videoCode;
+  let type;
+  let splitter;
+  if (url.includes("v=")) {
+    type = "video";
+    splitter = "v=";
+  } else if (url.includes("list=")) {
+    type = "playlist";
+    splitter = "list=";
+  }
+  const urlWithoutSplitter = url.split(splitter)[1];
+  const contentID = urlWithoutSplitter.split("&")[0];
+  return { contentID, type };
 }

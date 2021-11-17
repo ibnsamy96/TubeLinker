@@ -22,7 +22,7 @@ body {
 }
 
 section {
-  margin-top: 50px;
+  margin-top: 35px;
 }
 
 input {
@@ -60,6 +60,10 @@ button {
 
 button:focus {
   background-color: purple;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 iframe {
