@@ -25,24 +25,30 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+
+  box-sizing: border-box;
+  padding-top: 35px;
+  padding-bottom: 35px;
+
+  gap: 25px;
 }
 
 section {
-  margin-top: 35px;
+  /* margin-top: 35px; */
   width: 100%;
 }
 
-section#content {
-  flex-grow: 2;
-}
-
-form {
-  max-width: 880px;
-  margin: auto;
+section#form {
+  box-sizing: border-box;
+  width: 90%;
+  /* margin: auto; */
+  max-width: 750px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 form div {
-  width: 74%;
+  width: 82%;
   position: relative;
   margin: auto;
   display: inline-block;
@@ -78,21 +84,21 @@ option {
 }
 
 input:hover,
-button:hover {
+form button:hover {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.2);
 }
 
 input:focus,
-button:focus {
+form button:focus {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.4);
 }
 
 label,
-button {
+form button {
   color: white;
   font-weight: bold;
 }
-button {
+form button {
   background-color: blueviolet;
   padding: 1rem 2rem;
   border: 1px solid transparent;
@@ -101,14 +107,11 @@ button {
   font-weight: bold;
   color: white;
   display: inline-block;
-}
-
-button:focus {
-  background-color: purple;
-}
-
-button:hover {
   cursor: pointer;
+}
+
+form button:focus {
+  background-color: purple;
 }
 
 iframe {
@@ -116,15 +119,57 @@ iframe {
   max-width: 90%;
   aspect-ratio: 750/450;
   height: auto;
-  margin-bottom: 35px;
+}
+
+#download {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  max-width: 750px;
+
+  margin-right: auto;
+  margin-left: auto;
+
+  padding: 25px 25px 20px 25px;
+  text-align: left;
+
+  display: none;
+  box-sizing: border-box;
+  width: 90%;
+}
+
+#download a {
+  background-color: violet;
+  padding: 1rem 1.3rem;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  color: white;
+  /* display: inline-block; */
+  cursor: pointer;
+}
+
+#download a:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+#download a:focus {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
+}
+
+#download #qualities {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding: 10px;
 }
 
 @media (max-width: 550px) {
   .container {
     flex-direction: column-reverse;
+    gap: 15px;
   }
   form {
-    width: 90%;
+    width: 100%;
     margin: auto;
   }
   form div {
@@ -134,7 +179,7 @@ iframe {
   select {
     padding: 1rem 0.2rem;
   }
-  button {
+  form button {
     display: block;
     margin-left: auto;
   }
@@ -143,11 +188,7 @@ iframe {
     margin-bottom: 0;
   }
 
-  #form {
-    margin-bottom: 35px;
-  }
-
-  #content {
+  #player {
     display: flex;
     flex-direction: column;
     align-items: center;
