@@ -14,22 +14,31 @@ def fetchData(url: str):
 
 def filterUnneededFormats(formats: list):
     goodFormats = []
+
     for format in formats:
         if format["ext"] == "mp4":
-            format["size"] = format["size"] / 1048576
             goodFormats.append(format)
+
     return goodFormats
 
 
 def formatVideoData(rowData: object):
-    return {
+    returnedData = {
         "url": rowData["url"],
         "quality": rowData["quality"],
         "title": rowData["title"],
         "description": rowData["description"],
         "thumbnails": rowData["thumbnails"],
-        "formats": filterUnneededFormats(rowData["format"]),
     }
+
+    try:
+        returnedData["formats"] = (filterUnneededFormats(rowData["format"]),)
+
+    except:
+        print("Error happened with video -> " + rowData["title"])
+        returnedData["formats"] = (rowData["format"],)
+
+    return returnedData
 
 
 def formatPlaylistData(rowData: object):
