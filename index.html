@@ -13,6 +13,30 @@
       href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
+    <style>
+      /* width */
+      ::-webkit-scrollbar {
+        --length: 10px;
+        width: var(--length);
+        height: var(--length);
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    </style>
   </head>
 
   <body>
@@ -31,7 +55,14 @@
           <button type="submit" value="go">GO</button>
         </form>
       </section>
-      <section id="content"></section>
+      <section id="player"></section>
+      <section id="download">
+        <p>Choose the quality to download in:</p>
+        <div id="qualities">
+          <a data-type="video">1080</button>
+          <a data-type="video">720</a>
+        </div>
+      </section>
     </div>
     <script src="./app.js"></script>
   </body>
