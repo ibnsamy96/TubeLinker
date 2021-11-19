@@ -146,6 +146,7 @@ iframe {
   color: white;
   /* display: inline-block; */
   cursor: pointer;
+  text-decoration: none;
 }
 
 #download a:hover {

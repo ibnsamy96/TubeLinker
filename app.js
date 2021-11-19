@@ -1,3 +1,8 @@
+const production = true;
+let backendURL = production
+  ? "http://127.0.0.1:8000"
+  : "https://ynsfab.deta.dev";
+
 const addPlaylistIframe = (listID) => {
   // src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY"
   return `<iframe width="750" height="450" src="https://www.youtube.com/embed?listType=playlist&list=${listID}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
@@ -12,13 +17,23 @@ let contentIDElement = document.querySelector("#contentID");
 let contentTypeElement = document.querySelector("#contentType");
 
 function showContent(value = null, type = null) {
+  document.querySelector("#download").style.display = "none";
+
   contentID = value || contentIDElement.value;
   contentType = type || contentTypeElement.value;
   console.log(contentType);
+
   if (contentType === "video")
-    document.querySelector("#content").innerHTML = addVideoIframe(contentID);
+    document.querySelector("#player").innerHTML = addVideoIframe(contentID);
   else if (contentType === "playlist")
-    document.querySelector("#content").innerHTML = addPlaylistIframe(contentID);
+    document.querySelector("#player").innerHTML = addPlaylistIframe(contentID);
+
+  getDownloadData((type = contentType), (id = contentID))
+    .then(extractDownloadData)
+    .then(appendDownloadData)
+    .then(() => {
+      document.querySelector("#download").style.display = "block";
+    });
 }
 
 window.addEventListener("load", () => {
@@ -51,6 +66,50 @@ function extractQueryParams(url) {
   return queryParams;
 }
 
+function scrollToView(element) {
+  element.scrollIntoView();
+}
+
+async function getDownloadData(type, id) {
+  if (type === "playlist") return; // TODO remove this when you fix the playlist
+  const url = `${backendURL}/${type}?id=${id}`;
+  const response = await fetch(url);
+  const data = response.json();
+  return data;
+}
+
+function extractDownloadData(jsonData) {
+  console.log(jsonData.formats[0]);
+  const linksArray = [];
+  jsonData.quality.forEach((value) => {
+    value = value.split("");
+    value.pop();
+    value = value.join("");
+    const downloadData = jsonData.formats[0].find(
+      (format) => String(format.height) === String(value)
+    );
+    linksArray.push({
+      quality: value,
+      url: downloadData.url,
+      title: jsonData.title,
+    });
+  });
+  return linksArray;
+}
+
+const downloadingQualitiesList = document.querySelector("#qualities");
+function appendDownloadData(linksArray) {
+  linksArray.forEach((linkObject) => {
+    const newAnchor = document.createElement("a");
+    newAnchor.innerText = linkObject.quality + "p";
+    newAnchor.setAttribute("href", linkObject.url);
+    newAnchor.setAttribute("download", linkObject.title);
+    // newAnchor.addEventListener("click", (e) => {
+    //   e.preventDefault();
+    // });
+    downloadingQualitiesList.appendChild(newAnchor);
+  });
+}
 // .........................................
 
 /*
