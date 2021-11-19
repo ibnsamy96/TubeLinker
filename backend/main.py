@@ -1,9 +1,26 @@
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import requests
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "https://myyp.vercel.app/",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def fetchData(url: str):
@@ -48,11 +65,18 @@ def formatPlaylistData(rowData: object):
 
     downloadLinks = {}
     for item in items:
-        for format in item["formats"]:
-            if format["height"] in downloadLinks:
-                downloadLinks[format["height"]].append(format["url"])
-            else:
-                downloadLinks[format["height"]] = [format["url"]]
+        try:
+            for format in item["formats"]:
+                if format["height"] in downloadLinks:
+                    downloadLinks[format["height"]].append(format["url"])
+                else:
+                    downloadLinks[format["height"]] = [format["url"]]
+        except:
+            for format in item["formats"][0]:
+                if format["height"] in downloadLinks:
+                    downloadLinks[format["height"]].append(format["url"])
+                else:
+                    downloadLinks[format["height"]] = [format["url"]]
 
     return {
         "totalResults": rowData["totalResults"],
