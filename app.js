@@ -1,4 +1,4 @@
-const production = true;
+const production = false;
 let backendURL = production
   ? "http://127.0.0.1:8000"
   : "https://ynsfab.deta.dev";
@@ -17,7 +17,8 @@ let contentIDElement = document.querySelector("#contentID");
 let contentTypeElement = document.querySelector("#contentType");
 
 function showContent(value = null, type = null) {
-  document.querySelector("#download").style.display = "none";
+  if (document.querySelector("#download"))
+    document.querySelector("#download").style.display = "none";
 
   contentID = value || contentIDElement.value;
   contentType = type || contentTypeElement.value;
