@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       url: `https://myyp.vercel.app/?${type}=${contentID}`,
     });
   } else {
-    dialogBox.innerText = "It isn't a youtube article link!";
+    dialogBox.innerText = "It isn't a youtube link!";
   }
 });
 
