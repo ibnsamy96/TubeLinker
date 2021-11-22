@@ -17,8 +17,11 @@ let contentIDElement = document.querySelector("#contentID");
 let contentTypeElement = document.querySelector("#contentType");
 
 function showContent(value = null, type = null) {
-  if (document.querySelector("#download"))
+  if (document.querySelector("#download")) {
+    resetDownloadData();
+    resetPageTitle();
     document.querySelector("#download").style.display = "none";
+  }
 
   contentID = value || contentIDElement.value;
   contentType = type || contentTypeElement.value;
@@ -31,6 +34,10 @@ function showContent(value = null, type = null) {
 
   getDownloadData((type = contentType), (id = contentID))
     .then(extractDownloadData)
+    .then((downloadingInfo) => {
+      updatePageTitle(downloadingInfo.title);
+      return downloadingInfo;
+    })
     .then(appendDownloadData)
     .then(() => {
       document.querySelector("#download").style.display = "block";
@@ -81,7 +88,7 @@ async function getDownloadData(type, id) {
 
 function extractDownloadData(jsonData) {
   console.log(jsonData.formats[0]);
-  const linksArray = [];
+  const links = [];
   jsonData.quality.forEach((value) => {
     value = value.split("");
     value.pop();
@@ -89,27 +96,37 @@ function extractDownloadData(jsonData) {
     const downloadData = jsonData.formats[0].find(
       (format) => String(format.height) === String(value)
     );
-    linksArray.push({
+    links.push({
       quality: value,
       url: downloadData.url,
-      title: jsonData.title,
     });
   });
-  return linksArray;
+  return { title: jsonData.title, links };
 }
 
 const downloadingQualitiesList = document.querySelector("#qualities");
-function appendDownloadData(linksArray) {
-  linksArray.forEach((linkObject) => {
+function appendDownloadData(downloadingInfo) {
+  downloadingInfo.links.forEach((linkObject) => {
     const newAnchor = document.createElement("a");
     newAnchor.innerText = linkObject.quality + "p";
     newAnchor.setAttribute("href", linkObject.url);
-    newAnchor.setAttribute("download", linkObject.title);
+    newAnchor.setAttribute("download", downloadingInfo.title);
     // newAnchor.addEventListener("click", (e) => {
     //   e.preventDefault();
     // });
     downloadingQualitiesList.appendChild(newAnchor);
   });
+}
+function resetDownloadData() {
+  downloadingQualitiesList.innerHTML = "";
+}
+
+const pageTitleElement = document.querySelector("title");
+function updatePageTitle(title) {
+  pageTitleElement.innerText = `${title} | My Youtube Player`;
+}
+function resetPageTitle() {
+  pageTitleElement.innerText = "My Youtube Player";
 }
 // .........................................
 
