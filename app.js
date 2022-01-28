@@ -45,7 +45,17 @@ function showContent(value = null, type = null) {
 }
 
 window.addEventListener("load", () => {
-  const queryParams = extractQueryParams(location.href);
+  let queryParams = checkForSharedURL();
+  if (!!queryParams) {
+    const { type, contentID } = queryParams;
+    console.log(queryParams);
+    contentIDElement.value = contentID;
+    contentTypeElement.value = type;
+    showContent(contentID, type);
+    return;
+  }
+
+  queryParams = extractQueryParams(location.href);
   if (!queryParams) return;
 
   ["video", "playlist"].some((type) => {
@@ -145,6 +155,21 @@ https://api.youtubemultidownloader.com/playlist?url=https%3A%2F%2Fwww.youtube.co
 
 */
 
+function checkForSharedURL() {
+  const parsedUrl = new URL(window.location);
+  // searchParams.get() will properly handle decoding the values.
+  if (!parsedUrl.searchParams.get("url")) return false;
+  console.log("Title shared: " + parsedUrl.searchParams.get("title"));
+  console.log("Text shared: " + parsedUrl.searchParams.get("text"));
+  console.log("URL shared: " + parsedUrl.searchParams.get("url"));
+
+  const { contentID, type } = sliceYoutubeURL(
+    parsedUrl.searchParams.get("url")
+  );
+
+  return { type, contentID };
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker
@@ -152,4 +177,19 @@ if ("serviceWorker" in navigator) {
       .then((res) => console.log("service worker registered"))
       .catch((err) => console.log("service worker not registered", err));
   });
+}
+
+function sliceYoutubeURL(url) {
+  let type;
+  let splitter;
+  if (url.includes("v=")) {
+    type = "video";
+    splitter = "v=";
+  } else if (url.includes("list=")) {
+    type = "playlist";
+    splitter = "list=";
+  }
+  const urlWithoutSplitter = url.split(splitter)[1];
+  const contentID = urlWithoutSplitter.split("&")[0];
+  return { contentID, type };
 }

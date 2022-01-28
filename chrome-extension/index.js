@@ -27,7 +27,6 @@ function testYoutubeRegex(url) {
   const youtubeRegex = /v=|list=/;
   return youtubeRegex.test(url);
 }
-//
 
 function sliceYoutubeURL(url) {
   let type;
