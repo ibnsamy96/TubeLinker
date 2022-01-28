@@ -1,4 +1,4 @@
-const production = false;
+const production = true;
 let backendURL = production
   ? "http://127.0.0.1:8000"
   : "https://ynsfab.deta.dev";
@@ -144,3 +144,12 @@ https://api.youtubemultidownloader.com/playlist?url=https%3A%2F%2Fwww.youtube.co
 https://api.youtubemultidownloader.com/playlist?url=https%3A%2F%2Fwww.youtube.com%2Fplaylist%3Flist%3DPLv4y5OVUmyFjx4uf_sQunpq8nlQiar_iQ&nextPageToken=0LYXQq27682bjNZlsnK43SKeaq6EwbhLVsPEC2UilZqYtEXIq5dAMEl2G5fphkFaLDBM0VnyPA%2BZj7jfOIytDNz9sYMhJZ8rTJi%2F9FvUYctM2PnyCNasIp72GdUtB5ny%2F068bIRd1l%2BUwiMhS5risCrRQzICAeOsxJX%2BYehi6GWcMNcSSgFZMoBtP4JQ23Jq
 
 */
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker
+      .register("/serviceWorker.js")
+      .then((res) => console.log("service worker registered"))
+      .catch((err) => console.log("service worker not registered", err));
+  });
+}
