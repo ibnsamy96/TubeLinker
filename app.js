@@ -1,7 +1,7 @@
-const production = true;
-let backendURL = production
-  ? "http://127.0.0.1:8000"
-  : "https://ynsfab.deta.dev";
+let apiURL =
+  window.location.hostname !== "localhost"
+    ? "https://ynsfab.deta.dev"
+    : "http://127.0.0.1:8000";
 
 const addPlaylistIframe = (listID) => {
   // src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY"
@@ -41,6 +41,9 @@ function showContent(value = null, type = null) {
     .then(appendDownloadData)
     .then(() => {
       document.querySelector("#download").style.display = "block";
+    })
+    .catch((error) => {
+      console.log(error);
     });
 }
 
@@ -90,7 +93,7 @@ function scrollToView(element) {
 
 async function getDownloadData(type, id) {
   if (type === "playlist") return; // TODO remove this when you fix the playlist
-  const url = `${backendURL}/${type}?id=${id}`;
+  const url = `${apiURL}/${type}?id=${id}`;
   const response = await fetch(url);
   const data = response.json();
   return data;
