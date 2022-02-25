@@ -100,7 +100,7 @@ async function getDownloadData(type, id) {
 }
 
 function extractDownloadData(jsonData) {
-  console.log(jsonData.formats[0]);
+  console.log(jsonData);
   const links = [];
   jsonData.quality.forEach((value) => {
     value = value.split("");
