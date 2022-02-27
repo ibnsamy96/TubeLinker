@@ -119,7 +119,7 @@ function extractDownloadData(jsonData) {
     );
     links.push({
       quality: value,
-      url: downloadData.url,
+      url: downloadData?.url ?? null,
     });
   });
   return { title: jsonData.title, description: jsonData.description, links };
