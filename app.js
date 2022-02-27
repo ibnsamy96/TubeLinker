@@ -4,12 +4,12 @@ if (window.location.hostname === "localhost") {
   env = prompt("Choose your backend environment (dev/prod).");
 }
 
-console.log(env);
+console.log({ env });
 
 let apiURL =
   !env || env === "prod" ? "https://ynsfab.deta.dev" : "http://127.0.0.1:8000";
 
-console.log(apiURL);
+console.log({ apiURL });
 
 const addPlaylistIframe = (listID) => {
   // src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY"
@@ -35,7 +35,7 @@ function showContent(value = null, type = null) {
 
   contentID = value || contentIDElement.value;
   contentType = type || contentTypeElement.value;
-  console.log(contentType);
+  console.log({ contentType });
 
   if (contentType === "video")
     document.querySelector("#player").innerHTML = addVideoIframe(contentID);
@@ -63,7 +63,7 @@ window.addEventListener("load", () => {
   let queryParams = checkForSharedURL();
   if (!!queryParams) {
     const { type, contentID } = queryParams;
-    console.log(queryParams);
+    console.log({ queryParams });
     contentIDElement.value = contentID;
     contentTypeElement.value = type;
     showContent(contentID, type);
@@ -95,7 +95,7 @@ function extractQueryParams(url) {
     return acc;
   }, {});
 
-  console.log(queryParams);
+  console.log({ queryParams });
   return queryParams;
 }
 
@@ -112,7 +112,7 @@ async function getDownloadData(type, id) {
 }
 
 function extractDownloadData(jsonData) {
-  console.log(jsonData);
+  console.log({ jsonData });
   const links = [];
   jsonData.quality.forEach((value) => {
     value = value.split("");
