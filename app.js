@@ -50,6 +50,10 @@ function showContent(value = null, type = null) {
       document.querySelector("#description").style.display = "block";
       return downloadingInfo;
     })
+    .then((downloadingInfo) => {
+      updateScroll();
+      return downloadingInfo;
+    })
     .then(appendDownloadData)
     .then(() => (document.querySelector("#download").style.display = "block"))
     .catch((error) => console.log(error));
@@ -219,4 +223,8 @@ function sliceYoutubeURL(url) {
   const urlWithoutSplitter = url.split(splitter)[1];
   const contentID = urlWithoutSplitter.split("&")[0];
   return { contentID, type };
+}
+
+function updateScroll() {
+  window.scrollTo(0, document.body.scrollHeight);
 }

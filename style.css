@@ -177,6 +177,10 @@ h2 {
   margin-bottom: 10px;
 }
 
+#description p {
+  overflow-wrap: break-word;
+}
+
 @media (max-width: 550px) {
   .container {
     flex-direction: column-reverse;
@@ -207,5 +211,14 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  #download a,
+  #description p {
+    font-size: 14px;
   }
 }
