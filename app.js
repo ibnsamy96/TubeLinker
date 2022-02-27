@@ -1,7 +1,15 @@
+let env;
+
+if (window.location.hostname === "localhost") {
+  env = prompt("Choose your backend environment (dev/prod).");
+}
+
+console.log(env);
+
 let apiURL =
-  window.location.hostname !== "localhost"
-    ? "https://ynsfab.deta.dev"
-    : "http://127.0.0.1:8000";
+  !env || env === "prod" ? "https://ynsfab.deta.dev" : "http://127.0.0.1:8000";
+
+console.log(apiURL);
 
 const addPlaylistIframe = (listID) => {
   // src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY"
