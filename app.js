@@ -27,8 +27,10 @@ let contentTypeElement = document.querySelector("#contentType");
 function showContent(value = null, type = null) {
   if (document.querySelector("#download")) {
     resetDownloadData();
+    resetVideoInfo();
     resetPageTitle();
     document.querySelector("#download").style.display = "none";
+    document.querySelector("#description").style.display = "none";
   }
 
   contentID = value || contentIDElement.value;
@@ -42,13 +44,12 @@ function showContent(value = null, type = null) {
 
   getDownloadData((type = contentType), (id = contentID))
     .then(extractDownloadData)
-    .then((downloadingInfo) => {
-      updatePageTitle(downloadingInfo.title);
-      return downloadingInfo;
-    })
+    .then(updatePageTitle)
+    .then(appendVideoInfo)
     .then(appendDownloadData)
     .then(() => {
       document.querySelector("#download").style.display = "block";
+      document.querySelector("#description").style.display = "block";
     })
     .catch((error) => {
       console.log(error);
@@ -122,7 +123,7 @@ function extractDownloadData(jsonData) {
       url: downloadData.url,
     });
   });
-  return { title: jsonData.title, links };
+  return { title: jsonData.title, description: jsonData.description, links };
 }
 
 const downloadingQualitiesList = document.querySelector("#qualities");
@@ -137,14 +138,30 @@ function appendDownloadData(downloadingInfo) {
     // });
     downloadingQualitiesList.appendChild(newAnchor);
   });
+  return downloadingInfo;
 }
 function resetDownloadData() {
   downloadingQualitiesList.innerHTML = "";
 }
 
+const descriptionContainer = document.querySelector("#description");
+function appendVideoInfo(downloadingInfo) {
+  const titleElement = descriptionContainer.querySelector("h2");
+  titleElement.innerText = downloadingInfo.title;
+  const descriptionElement = descriptionContainer.querySelector("p");
+  descriptionElement.innerText = downloadingInfo.description;
+  return downloadingInfo;
+}
+function resetVideoInfo() {
+  [...descriptionContainer.children].forEach((el) => {
+    el.innerHTML = "";
+  });
+}
+
 const pageTitleElement = document.querySelector("title");
-function updatePageTitle(title) {
-  pageTitleElement.innerText = `${title} | My Youtube Player`;
+function updatePageTitle(downloadingInfo) {
+  pageTitleElement.innerText = `${downloadingInfo.title} | My Youtube Player`;
+  return downloadingInfo;
 }
 function resetPageTitle() {
   pageTitleElement.innerText = "My Youtube Player";

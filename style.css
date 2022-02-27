@@ -30,7 +30,7 @@ body {
   padding-top: 35px;
   padding-bottom: 35px;
 
-  gap: 25px;
+  gap: 10px;
 }
 
 section {
@@ -121,7 +121,8 @@ iframe {
   height: auto;
 }
 
-#download {
+#download,
+#description {
   background-color: whitesmoke;
   border-radius: 10px;
   max-width: 750px;
@@ -162,6 +163,18 @@ iframe {
   gap: 5px;
   overflow-x: auto;
   padding: 10px;
+}
+
+p#description {
+  color: #191919;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+#description h2 {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 550px) {
