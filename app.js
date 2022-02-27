@@ -51,7 +51,10 @@ function showContent(value = null, type = null) {
       return downloadingInfo;
     })
     .then((downloadingInfo) => {
-      updateScroll();
+      const isMobile = window.matchMedia("(max-width: 550px)");
+      if (isMobile.matches) {
+        updateScroll();
+      }
       return downloadingInfo;
     })
     .then(appendDownloadData)
