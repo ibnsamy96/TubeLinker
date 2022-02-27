@@ -46,14 +46,13 @@ function showContent(value = null, type = null) {
     .then(extractDownloadData)
     .then(updatePageTitle)
     .then(appendVideoInfo)
-    .then(appendDownloadData)
-    .then(() => {
-      document.querySelector("#download").style.display = "block";
+    .then((downloadingInfo) => {
       document.querySelector("#description").style.display = "block";
+      return downloadingInfo;
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .then(appendDownloadData)
+    .then(() => (document.querySelector("#download").style.display = "block"))
+    .catch((error) => console.log(error));
 }
 
 window.addEventListener("load", () => {
