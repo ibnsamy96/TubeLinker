@@ -2,8 +2,18 @@
   "manifest_version": 3,
   "name": "Youtube Video Player",
   "version": "1.0",
-  "description": "",
-  "action": { "default_popup": "index.html", "default_icon": "icon.png" },
-  "permissions": ["tabs"],
-  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+  "description": "I use Cold Turkey to not spend much time watching youtube videos, and I'm building this extension to avoid missing important videos.",
+  "short description": "Special web page to watch youtube videos while using youtube blocker.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
 }
