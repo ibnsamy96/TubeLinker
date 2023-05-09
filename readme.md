@@ -26,4 +26,4 @@ The application also provides a download feature that allows users to download y
 
 ## Try it out
 
-You can access the web application at www.myyp.vercel.app and download the browser extension from the Microsoft Edge Add-ons store at https://microsoftedge.microsoft.com/addons/detail/tubelinker/dnkmmgcoedlfendknkffmglhdhlmnade.
+You can access the web application at www.tubelinker.ibnsamy.com and download the browser extension from the Microsoft Edge Add-ons store at https://microsoftedge.microsoft.com/addons/detail/tubelinker/dnkmmgcoedlfendknkffmglhdhlmnade.
